@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>English Cards — Self Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700;9..144,900&family=JetBrains+Mono:wght@400;500;700&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<style>
+  :root{
+    --bg: #0e0e10;
+    --bg-2: #16161a;
+    --panel: #1c1c22;
+    --panel-2: #23232b;
+    --border: #2a2a33;
+    --text: #f4f1ea;
+    --text-dim: #9a958c;
+    --accent: #f0c14b;
+    --accent-2: #ff6b3d;
+    --green: #6dd58c;
+    --red: #ff5e6c;
+    --shadow: 0 30px 80px -20px rgba(0,0,0,.6), 0 8px 24px -8px rgba(0,0,0,.4);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Geist',-apple-system,system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
+  body::before{
+    content:'';position:fixed;inset:0;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 0%, rgba(240,193,75,.08), transparent 60%),
+      radial-gradient(ellipse 50% 50% at 90% 100%, rgba(255,107,61,.06), transparent 60%);
+    pointer-events:none;z-index:0;
+  }
+  .grain{position:fixed;inset:0;pointer-events:none;opacity:.04;z-index:1;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:32px 24px 80px}
+
+  /* Header */
+  header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;gap:16px;flex-wrap:wrap}
+  .logo{display:flex;align-items:baseline;gap:14px}
+  .logo h1{
+    font-family:'Fraunces',serif;font-weight:900;font-size:clamp(28px,4vw,44px);
+    margin:0;letter-spacing:-.03em;line-height:1;
+    font-variation-settings:"opsz" 144;
+  }
+  .logo h1 em{font-style:italic;color:var(--accent);font-weight:500}
+  .logo .sub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase}
+
+  .top-actions{display:flex;gap:10px;flex-wrap:wrap}
+  button,.btn{
+    font-family:inherit;font-size:14px;font-weight:500;
+    background:var(--panel);color:var(--text);border:1px solid var(--border);
+    padding:10px 18px;border-radius:10px;cursor:pointer;
+    transition:all .2s ease;display:inline-flex;align-items:center;gap:8px;
+  }
+  button:hover,.btn:hover{background:var(--panel-2);border-color:#3a3a45;transform:translateY(-1px)}
+  button:active{transform:translateY(0)}
+  button.primary{background:var(--accent);color:#1a1a1f;border-color:var(--accent);font-weight:600}
+  button.primary:hover{background:#ffd56b;border-color:#ffd56b}
+  button.danger{background:transparent;color:var(--red);border-color:rgba(255,94,108,.3)}
+  button.ghost{background:transparent}
+  button:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+  /* Layout */
+  .layout{display:grid;grid-template-columns:340px 1fr;gap:24px}
+  @media(max-width:980px){.layout{grid-template-columns:1fr}}
+
+  .panel{
+    background:var(--panel);border:1px solid var(--border);
+    border-radius:18px;padding:22px;box-shadow:var(--shadow);
+  }
+  .panel h2{
+    font-family:'Fraunces',serif;font-weight:700;font-size:18px;
+    margin:0 0 18px;letter-spacing:-.01em;
+    display:flex;align-items:center;gap:8px;
+  }
+  .panel h2::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent)}
+
+  .field{margin-bottom:16px}
+  .field label{
+    display:block;font-size:11px;font-family:'JetBrains Mono',monospace;
+    color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;
+  }
+  .field input[type="text"], .field input[type="number"], .field select, .field input[type="password"]{
+    width:100%;background:var(--bg-2);border:1px solid var(--border);
+    color:var(--text);padding:11px 14px;border-radius:9px;font-family:inherit;font-size:14px;
+    transition:border-color .15s;
+  }
+  .field input:focus, .field select:focus{outline:none;border-color:var(--accent)}
+
+  .switch-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;gap:10px}
+  .switch-row span{font-size:13px}
+  .switch{position:relative;width:38px;height:22px;flex-shrink:0}
+  .switch input{opacity:0;width:0;height:0}
+  .switch .slider{
+    position:absolute;cursor:pointer;inset:0;background:#33333d;
+    transition:.2s;border-radius:22px;
+  }
+  .switch .slider::before{
+    content:'';position:absolute;height:16px;width:16px;left:3px;top:3px;
+    background:#bbb;transition:.2s;border-radius:50%;
+  }
+  .switch input:checked + .slider{background:var(--accent)}
+  .switch input:checked + .slider::before{transform:translateX(16px);background:#1a1a1f}
+
+  .seg{display:flex;background:var(--bg-2);border:1px solid var(--border);border-radius:9px;padding:3px;gap:3px}
+  .seg button{
+    flex:1;background:transparent;border:none;padding:8px 10px;
+    border-radius:7px;font-size:12.5px;color:var(--text-dim);font-weight:500;
+  }
+  .seg button.active{background:var(--accent);color:#1a1a1f}
+  .seg button:hover:not(.active){color:var(--text);background:transparent}
+
+  .hint{font-size:11.5px;color:var(--text-dim);line-height:1.5;margin-top:6px}
+  .hint a{color:var(--accent);text-decoration:none}
+  .hint a:hover{text-decoration:underline}
+
+  /* Status / stats */
+  .status{
+    display:flex;align-items:center;gap:10px;padding:10px 14px;
+    background:var(--bg-2);border-radius:9px;font-size:12.5px;
+    border:1px solid var(--border);
+  }
+  .status .dot{width:8px;height:8px;border-radius:50%;background:var(--text-dim)}
+  .status.ok .dot{background:var(--green);box-shadow:0 0 10px var(--green)}
+  .status.err .dot{background:var(--red)}
+  .status.loading .dot{background:var(--accent);animation:pulse 1s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+  /* Card area */
+  .study{display:flex;flex-direction:column;gap:18px;min-height:540px}
+
+  .progress-bar{
+    height:6px;background:var(--bg-2);border-radius:3px;overflow:hidden;
+    border:1px solid var(--border);
+  }
+  .progress-bar div{
+    height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    transition:width .3s ease;border-radius:3px;
+  }
+
+  .stats-row{display:flex;gap:12px;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:12px}
+  .stats-row .stat{
+    padding:6px 12px;background:var(--bg-2);border:1px solid var(--border);
+    border-radius:6px;color:var(--text-dim);
+  }
+  .stats-row .stat b{color:var(--text);margin-left:6px;font-weight:700}
+  .stats-row .stat.green b{color:var(--green)}
+  .stats-row .stat.red b{color:var(--red)}
+
+  /* Card */
+  .card-wrap{
+    flex:1;display:flex;align-items:center;justify-content:center;
+    perspective:1200px;min-height:380px;
+  }
+  .card{
+    position:relative;width:100%;max-width:680px;height:380px;
+    transform-style:preserve-3d;transition:transform .6s cubic-bezier(.4,0,.2,1);
+    cursor:pointer;
+  }
+  .card.flipped{transform:rotateY(180deg)}
+  .card .face{
+    position:absolute;inset:0;backface-visibility:hidden;
+    background:linear-gradient(145deg,var(--panel) 0%,var(--panel-2) 100%);
+    border:1px solid var(--border);border-radius:20px;
+    padding:40px;display:flex;flex-direction:column;justify-content:center;align-items:center;
+    box-shadow:var(--shadow);text-align:center;
+  }
+  .card .face.back{transform:rotateY(180deg)}
+  .card .face::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    border-radius:20px 20px 0 0;
+  }
+  .card .label{
+    position:absolute;top:16px;left:20px;
+    font-family:'JetBrains Mono',monospace;font-size:10px;
+    color:var(--text-dim);text-transform:uppercase;letter-spacing:.15em;
+  }
+  .card .hard-badge{
+    position:absolute;top:14px;right:18px;font-size:11px;
+    background:rgba(255,94,108,.12);color:var(--red);
+    padding:4px 10px;border-radius:20px;border:1px solid rgba(255,94,108,.25);
+    font-family:'JetBrains Mono',monospace;
+  }
+  .card .word{
+    font-family:'Fraunces',serif;font-weight:700;
+    font-size:clamp(36px,5.5vw,64px);letter-spacing:-.02em;line-height:1.05;
+    margin:0 0 18px;font-variation-settings:"opsz" 144;
+  }
+  .card .word em{font-style:italic;font-weight:500;color:var(--accent)}
+  .card .sentence{
+    font-family:'Fraunces',serif;font-style:italic;
+    font-size:clamp(15px,1.7vw,19px);color:var(--text-dim);
+    max-width:540px;line-height:1.5;margin-top:8px;
+  }
+  .card .sentence b{color:var(--text);font-style:normal;font-weight:600;background:rgba(240,193,75,.12);padding:1px 5px;border-radius:3px}
+  .card .syn{
+    margin-top:18px;font-size:13px;color:var(--text-dim);
+    font-family:'JetBrains Mono',monospace;
+  }
+  .card .flip-hint{
+    position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
+    font-size:10.5px;color:var(--text-dim);
+    font-family:'JetBrains Mono',monospace;letter-spacing:.1em;
+    opacity:.6;
+  }
+
+  .answer-row{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
+  }
+  @media(max-width:600px){.answer-row{grid-template-columns:1fr 1fr}}
+  .answer-row button{
+    padding:14px 8px;font-size:13px;font-weight:600;flex-direction:column;gap:2px;
+    border-radius:11px;
+  }
+  .answer-row button small{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--text-dim);font-weight:400;letter-spacing:.05em}
+  .answer-row button:hover small{color:inherit;opacity:.8}
+  .ans-again{border-color:rgba(255,94,108,.3);color:var(--red)}
+  .ans-again:hover{background:rgba(255,94,108,.1)}
+  .ans-hard{border-color:rgba(240,193,75,.3);color:var(--accent)}
+  .ans-hard:hover{background:rgba(240,193,75,.1)}
+  .ans-good{border-color:rgba(109,213,140,.3);color:var(--green)}
+  .ans-good:hover{background:rgba(109,213,140,.1)}
+  .ans-easy{background:var(--green);color:#0e1a14;border-color:var(--green);font-weight:700}
+  .ans-easy:hover{background:#7ee29e;border-color:#7ee29e}
+
+  .nav-row{display:flex;gap:10px;justify-content:space-between}
+  .nav-row .left,.nav-row .right{display:flex;gap:8px}
+
+  /* Empty state */
+  .empty{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:60px 30px;color:var(--text-dim);min-height:380px;
+  }
+  .empty .icon{
+    font-family:'Fraunces',serif;font-size:80px;color:var(--accent);
+    line-height:1;margin-bottom:20px;font-style:italic;font-weight:300;
+  }
+  .empty h3{font-family:'Fraunces',serif;font-weight:700;font-size:22px;color:var(--text);margin:0 0 8px}
+  .empty p{margin:0 0 20px;max-width:380px;line-height:1.55;font-size:14px}
+
+  /* Modal */
+  .modal-bg{
+    position:fixed;inset:0;background:rgba(0,0,0,.7);
+    backdrop-filter:blur(6px);z-index:50;display:none;
+    align-items:center;justify-content:center;padding:20px;
+  }
+  .modal-bg.show{display:flex}
+  .modal{
+    background:var(--panel);border:1px solid var(--border);border-radius:18px;
+    padding:28px;max-width:520px;width:100%;box-shadow:var(--shadow);
+  }
+  .modal h3{font-family:'Fraunces',serif;font-weight:700;font-size:22px;margin:0 0 8px}
+  .modal p{color:var(--text-dim);font-size:13.5px;line-height:1.6;margin:0 0 16px}
+  .modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}
+  .modal ol{padding-left:20px;color:var(--text-dim);font-size:13px;line-height:1.7}
+  .modal ol code{background:var(--bg-2);padding:1px 6px;border-radius:4px;font-size:12px;color:var(--accent)}
+
+  /* Finish screen */
+  .finish{text-align:center;padding:40px 20px}
+  .finish .big{font-family:'Fraunces',serif;font-size:64px;font-weight:900;color:var(--accent);line-height:1;font-style:italic}
+  .finish h3{font-family:'Fraunces',serif;font-size:28px;margin:14px 0 6px}
+  .finish p{color:var(--text-dim);margin:0 0 22px}
+  .finish-stats{display:flex;justify-content:center;gap:18px;margin:20px 0;flex-wrap:wrap}
+  .finish-stats .s{padding:14px 22px;background:var(--bg-2);border:1px solid var(--border);border-radius:12px;min-width:90px}
+  .finish-stats .s .v{font-family:'Fraunces',serif;font-size:28px;font-weight:700;display:block}
+  .finish-stats .s .l{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;margin-top:4px;display:block}
+
+  details summary{cursor:pointer;font-size:12px;color:var(--text-dim);padding:6px 0;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.08em}
+  details summary:hover{color:var(--text)}
+  details[open] summary{margin-bottom:10px}
+
+  .kbd{
+    display:inline-block;padding:1px 6px;font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;background:var(--bg-2);border:1px solid var(--border);
+    border-bottom-width:2px;border-radius:4px;color:var(--text-dim);
+  }
+
+  .hard-toggle{
+    position:absolute;top:14px;right:18px;
+    background:transparent;border:1px solid rgba(255,94,108,.3);color:var(--text-dim);
+    padding:5px 12px;border-radius:20px;font-size:11px;cursor:pointer;
+    font-family:'JetBrains Mono',monospace;letter-spacing:.05em;
+    transition:all .15s;display:flex;align-items:center;gap:5px;z-index:5;
+  }
+  .hard-toggle:hover{background:rgba(255,94,108,.08);color:var(--red)}
+  .hard-toggle.active{background:rgba(255,94,108,.15);color:var(--red);border-color:var(--red)}
+  .hard-toggle .star{font-size:13px}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="wrap">
+
+  <header>
+    <div class="logo">
+      <h1>English<em>·</em>Cards</h1>
+      <span class="sub">self study · anki style</span>
+    </div>
+    <div class="top-actions">
+      <button id="btnLoad" class="primary">↻ Загрузить из Google Sheets</button>
+      <button id="btnSettings" class="ghost">⚙ API ключ</button>
+    </div>
+  </header>
+
+  <div class="layout">
+
+    <!-- SETTINGS PANEL -->
+    <aside class="panel">
+      <h2>Настройки</h2>
+
+      <div class="field">
+        <label>Направление</label>
+        <div class="seg" id="segDir">
+          <button data-v="en-ru" class="active">EN → RU</button>
+          <button data-v="ru-en">RU → EN</button>
+          <button data-v="mixed">Mixed</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Количество карточек</label>
+        <input type="number" id="inpCount" min="0" max="500" value="20" placeholder="0 = все" />
+        <div class="hint" style="margin-top:4px">0 или пусто = все слова под фильтры</div>
+      </div>
+
+      <div class="field">
+        <label>Порядок</label>
+        <select id="selOrder">
+          <option value="random">Случайный</option>
+          <option value="newest">Сначала новые</option>
+          <option value="oldest">Сначала старые</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Фильтр</label>
+        <select id="selFilter">
+          <option value="all">Все слова</option>
+          <option value="hard">Только сложные</option>
+          <option value="not-hard">Только не сложные</option>
+          <option value="not-shown">Только не выученные (Show=False)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Дата (диапазон)</label>
+        <select id="selDate">
+          <option value="all">Все даты</option>
+          <option value="7">Последние 7 дней</option>
+          <option value="14">Последние 14 дней</option>
+          <option value="30">Последние 30 дней</option>
+        </select>
+      </div>
+
+      <details>
+        <summary>+ Доп. настройки</summary>
+        <div class="field"><div class="switch-row"><span>Показывать пример</span>
+          <label class="switch"><input type="checkbox" id="cbSentence" checked><span class="slider"></span></label></div></div>
+        <div class="field"><div class="switch-row"><span>Показывать синонимы</span>
+          <label class="switch"><input type="checkbox" id="cbSynonyms" checked><span class="slider"></span></label></div></div>
+        <div class="field"><div class="switch-row"><span>Авто-произношение (TTS)</span>
+          <label class="switch"><input type="checkbox" id="cbTts"><span class="slider"></span></label></div></div>
+        <div class="field"><div class="switch-row"><span>Скрыть слово в примере</span>
+          <label class="switch"><input type="checkbox" id="cbHide" checked><span class="slider"></span></label></div></div>
+        <div class="field"><div class="switch-row"><span>Повторять «снова» в конце</span>
+          <label class="switch"><input type="checkbox" id="cbRepeat" checked><span class="slider"></span></label></div></div>
+        <div class="field"><div class="switch-row"><span>Авто-флип через 5 сек</span>
+          <label class="switch"><input type="checkbox" id="cbAuto"><span class="slider"></span></label></div></div>
+      </details>
+
+      <div class="field" style="margin-top:14px">
+        <button id="btnStart" class="primary" style="width:100%;justify-content:center;padding:13px">▶ Начать сессию</button>
+      </div>
+
+      <div id="status" class="status"><span class="dot"></span><span id="statusText">Нет данных. Введи API ключ и загрузи.</span></div>
+
+      <div class="hint" style="margin-top:14px">
+        <span class="kbd">Space</span> флип · <span class="kbd">1-4</span> ответ · <span class="kbd">H</span> hard · <span class="kbd">←/→</span> навиг.
+      </div>
+    </aside>
+
+    <!-- STUDY AREA -->
+    <main class="panel study" id="study">
+      <div class="empty" id="emptyState">
+        <div class="icon">A↻</div>
+        <h3>Готов учить?</h3>
+        <p>Введи API ключ Google Sheets, загрузи таблицу, настрой параметры слева и нажми «Начать сессию».</p>
+        <button id="btnSettings2" class="primary">⚙ Ввести API ключ</button>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- API key modal -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <h3>Google Sheets — настройка</h3>
+    <p>Шаги в <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a>:</p>
+    <ol>
+      <li>Включи <b>Google Sheets API</b> (APIs & Services → Library)</li>
+      <li><b>Credentials → API key</b> — для чтения. API restrictions → только Sheets API</li>
+      <li><b>Credentials → OAuth client ID</b> — для записи. Тип: <code>Web application</code>. В <b>Authorized JavaScript origins</b> добавь <code>http://localhost:8000</code> (или порт, на котором открываешь файл)</li>
+      <li>Открой сайт через локальный сервер: <code>python3 -m http.server 8000</code> в папке с файлом</li>
+      <li>Таблицу: Share → Anyone with link → Viewer</li>
+    </ol>
+    <div class="field" style="margin-top:18px">
+      <label>API Key (для чтения)</label>
+      <input type="password" id="inpKey" placeholder="AIzaSy..." />
+    </div>
+    <div class="field">
+      <label>OAuth Client ID (для записи · опционально)</label>
+      <input type="text" id="inpClientId" placeholder="...apps.googleusercontent.com" />
+    </div>
+    <div class="field">
+      <label>ID таблицы</label>
+      <input type="text" id="inpSheetId" value="13njpnDojuZKWO5xOXm7WBPcnTIhkm0-Wt60SdjqDUns" />
+      <div class="hint">ID берется из ссылки: docs.google.com/spreadsheets/d/<b>ID</b>/edit</div>
+    </div>
+    <div class="field">
+      <label>Имя листа</label>
+      <input type="text" id="inpSheetName" value="words b3 anki" />
+    </div>
+    <div class="modal-actions">
+      <button id="btnCancelKey" class="ghost">Отмена</button>
+      <button id="btnSaveKey" class="primary">Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============== STATE ============== */
+const S = {
+  apiKey: localStorage.getItem('eng_api_key') || '',
+  clientId: localStorage.getItem('eng_client_id') || '',
+  sheetId: localStorage.getItem('eng_sheet_id') || '13njpnDojuZKWO5xOXm7WBPcnTIhkm0-Wt60SdjqDUns',
+  sheetName: localStorage.getItem('eng_sheet_name') || 'words b3 anki',
+  rawData: JSON.parse(localStorage.getItem('eng_raw_data') || 'null'),
+  rawDataAt: localStorage.getItem('eng_raw_at') || null,
+  accessToken: null,
+  tokenClient: null,
+  session: null,
+  settings: {
+    direction: 'en-ru', count: 20, order: 'random', filter: 'all', dateRange: 'all',
+    sentence: true, synonyms: true, tts: false, hide: true, repeat: true, auto: false
+  }
+};
+
+/* ============== ELEMENTS ============== */
+const $ = id => document.getElementById(id);
+const study = $('study'), modal = $('modalBg'), statusEl = $('status'), statusText = $('statusText');
+
+/* ============== MODAL ============== */
+function openModal(){
+  $('inpKey').value = S.apiKey;
+  $('inpClientId').value = S.clientId;
+  $('inpSheetId').value = S.sheetId;
+  $('inpSheetName').value = S.sheetName;
+  modal.classList.add('show');
+}
+function closeModal(){modal.classList.remove('show')}
+$('btnSettings').onclick = openModal;
+$('btnSettings2').onclick = openModal;
+$('btnCancelKey').onclick = closeModal;
+$('btnSaveKey').onclick = () => {
+  S.apiKey = $('inpKey').value.trim();
+  S.clientId = $('inpClientId').value.trim();
+  S.sheetId = $('inpSheetId').value.trim();
+  S.sheetName = $('inpSheetName').value.trim() || 'Sheet1';
+  localStorage.setItem('eng_api_key', S.apiKey);
+  localStorage.setItem('eng_client_id', S.clientId);
+  localStorage.setItem('eng_sheet_id', S.sheetId);
+  localStorage.setItem('eng_sheet_name', S.sheetName);
+  initOAuth();
+  closeModal();
+  setStatus('ok','Настройки сохранены. Нажми «Загрузить».');
+};
+
+/* ============== STATUS ============== */
+function setStatus(type, text){
+  statusEl.className = 'status ' + (type||'');
+  statusText.textContent = text;
+}
+if(S.rawData){
+  const date = S.rawDataAt ? new Date(S.rawDataAt).toLocaleString('ru-RU') : '';
+  setStatus('ok', `Загружено ${S.rawData.length} слов · ${date}`);
+}
+
+/* ============== LOAD FROM SHEETS ============== */
+$('btnLoad').onclick = async () => {
+  if(!S.apiKey){ setStatus('err','Сначала введи API ключ ⚙'); openModal(); return; }
+  if(!S.sheetId){ setStatus('err','Не указан ID таблицы'); openModal(); return; }
+  setStatus('loading','Загрузка...');
+  try{
+    const range = encodeURIComponent(S.sheetName);
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${S.sheetId}/values/${range}?key=${S.apiKey}&dateTimeRenderOption=FORMATTED_STRING&valueRenderOption=UNFORMATTED_VALUE`;
+    const r = await fetch(url);
+    if(!r.ok){
+      const err = await r.json().catch(()=>({}));
+      throw new Error(err.error?.message || 'HTTP ' + r.status);
+    }
+    const data = await r.json();
+    const rows = data.values || [];
+    if(rows.length < 2) throw new Error('В таблице нет строк с данными');
+    const parsed = parseRows(rows);
+    S.rawData = parsed;
+    S.rawDataAt = new Date().toISOString();
+    localStorage.setItem('eng_raw_data', JSON.stringify(parsed));
+    localStorage.setItem('eng_raw_at', S.rawDataAt);
+    setStatus('ok', `Загружено ${parsed.length} слов · только что`);
+  } catch(e){
+    setStatus('err', 'Ошибка: ' + e.message);
+  }
+};
+
+function parseRows(rows){
+  // headers: Дата, New word in English, Translation in Russian, Synonims, Sentence, Show New word, Show Translation, Show Sentence, Hard word
+  const out = [];
+  for(let i=1;i<rows.length;i++){
+    const r = rows[i];
+    if(!r || !r[1]) continue;
+    out.push({
+      rowIndex: i+1, // 1-based row number in the sheet (header is row 1)
+      date: r[0] || '',
+      en: String(r[1]||'').trim(),
+      ru: String(r[2]||'').trim(),
+      syn: String(r[3]||'').trim(),
+      sentence: String(r[4]||'').trim(),
+      showNew: !!r[5], showTrans: !!r[6], showSent: !!r[7],
+      hard: !!r[8]
+    });
+  }
+  return out;
+}
+
+/* ============== OAUTH ============== */
+function initOAuth(){
+  if(!S.clientId) return;
+  if(!window.google || !window.google.accounts) {
+    // GIS не загрузился еще, попробуем позже
+    setTimeout(initOAuth, 500);
+    return;
+  }
+  try {
+    S.tokenClient = google.accounts.oauth2.initTokenClient({
+      client_id: S.clientId,
+      scope: 'https://www.googleapis.com/auth/spreadsheets',
+      callback: (resp) => {
+        if(resp.access_token){
+          S.accessToken = resp.access_token;
+          if(S._afterAuth){ const fn = S._afterAuth; S._afterAuth = null; fn(); }
+        } else if(resp.error){
+          setStatus('err','OAuth ошибка: '+resp.error);
+        }
+      }
+    });
+  } catch(e){
+    console.error('OAuth init failed', e);
+  }
+}
+
+function requireAuth(cb){
+  if(!S.clientId){
+    setStatus('err','OAuth Client ID не указан. Открой ⚙');
+    openModal(); return;
+  }
+  if(!S.tokenClient) initOAuth();
+  if(!S.tokenClient){ setStatus('err','OAuth ещё не готов, попробуй ещё раз'); return; }
+  if(S.accessToken){ cb(); return; }
+  S._afterAuth = cb;
+  S.tokenClient.requestAccessToken({prompt: 'consent'});
+}
+
+async function markHardInSheet(rowIndices){
+  // PUT TRUE в столбец I для каждой строки. Используем batchUpdate для эффективности.
+  const data = rowIndices.map(idx => ({
+    range: `${S.sheetName}!I${idx}`,
+    values: [[true]]
+  }));
+  const url = `https://sheets.googleapis.com/v4/spreadsheets/${S.sheetId}/values:batchUpdate`;
+  const body = { valueInputOption: 'USER_ENTERED', data };
+  const r = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer ' + S.accessToken,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  });
+  if(!r.ok){
+    const err = await r.json().catch(()=>({}));
+    throw new Error(err.error?.message || 'HTTP '+r.status);
+  }
+  return await r.json();
+}
+
+// init OAuth on load if clientId already saved
+window.addEventListener('load', () => setTimeout(initOAuth, 800));
+
+/* ============== SETTINGS BIND ============== */
+document.querySelectorAll('#segDir button').forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll('#segDir button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    S.settings.direction = b.dataset.v;
+  };
+});
+$('inpCount').oninput = e => {
+  const v = e.target.value.trim();
+  S.settings.count = v === '' ? 0 : (parseInt(v) || 0);
+};
+$('selOrder').onchange = e => S.settings.order = e.target.value;
+$('selFilter').onchange = e => S.settings.filter = e.target.value;
+$('selDate').onchange = e => S.settings.dateRange = e.target.value;
+['cbSentence','cbSynonyms','cbTts','cbHide','cbRepeat','cbAuto'].forEach(id => {
+  const key = id.replace('cb','').toLowerCase();
+  const map = {sentence:'sentence',synonyms:'synonyms',tts:'tts',hide:'hide',repeat:'repeat',auto:'auto'};
+  $(id).onchange = e => S.settings[map[key]] = e.target.checked;
+});
+
+/* ============== SESSION START ============== */
+$('btnStart').onclick = () => {
+  if(!S.rawData || !S.rawData.length){ setStatus('err','Сначала загрузи данные'); return; }
+
+  // Infer year from data: take latest date that parses; if all dates are without year,
+  // use 2026 (год последних записей в таблице)
+  inferYearFromData();
+
+  let pool = S.rawData.slice();
+  const total0 = pool.length;
+
+  // filter
+  if(S.settings.filter === 'hard') pool = pool.filter(w => w.hard);
+  else if(S.settings.filter === 'not-hard') pool = pool.filter(w => !w.hard);
+  else if(S.settings.filter === 'not-shown') pool = pool.filter(w => !w.showNew);
+  const afterFilter = pool.length;
+
+  // date range
+  if(S.settings.dateRange !== 'all'){
+    const days = parseInt(S.settings.dateRange);
+    // Считаем относительно последней даты в данных, а не Date.now()
+    // (если ты учил 2 дня назад, "последние 7 дней" должны включать те слова)
+    const allDates = S.rawData.map(w => parseDate(w.date)).filter(d => d).map(d => d.getTime());
+    const refTime = allDates.length ? Math.max(...allDates) : Date.now();
+    const cutoff = refTime - (days-1)*86400000;
+    pool = pool.filter(w => {
+      const d = parseDate(w.date);
+      return d && d.getTime() >= cutoff;
+    });
+  }
+  const afterDate = pool.length;
+
+  if(!pool.length){
+    setStatus('err',`Нет слов под фильтры (всего: ${total0}, после фильтра: ${afterFilter}, после даты: ${afterDate})`);
+    return;
+  }
+
+  // order
+  if(S.settings.order === 'random'){
+    pool.sort(()=>Math.random()-.5);
+  } else if(S.settings.order === 'newest'){
+    pool.sort((a,b)=>(parseDate(b.date)?.getTime()||0)-(parseDate(a.date)?.getTime()||0));
+  } else if(S.settings.order === 'oldest'){
+    pool.sort((a,b)=>(parseDate(a.date)?.getTime()||0)-(parseDate(b.date)?.getTime()||0));
+  }
+
+  // count: если count пустой/0/больше доступного — берем всё что есть
+  const count = S.settings.count;
+  if(count && count > 0 && count < pool.length) pool = pool.slice(0, count);
+
+  S.session = {
+    queue: pool.map(w => ({...w, _dir: pickDir()})),
+    again: [], done: [], cur: 0, flipped:false,
+    markedHard: new Set(), // rowIndex set
+    stats:{again:0,hard:0,good:0,easy:0,total:pool.length}
+  };
+  setStatus('ok', `Сессия: ${pool.length} карточек`);
+  renderCard();
+};
+
+function inferYearFromData(){
+  // if dates are like "19 января" without year — pick max known year from data
+  const years = [];
+  for(const w of S.rawData){
+    if(typeof w.date === 'number' || (typeof w.date === 'string' && /\d{4}/.test(w.date))){
+      const d = parseDate(w.date);
+      if(d) years.push(d.getFullYear());
+    }
+  }
+  if(years.length){
+    window._inferYear = Math.max(...years);
+  } else {
+    // fallback: use current year, but если в данных есть Январь и Декабрь, могут быть смешанные годы
+    window._inferYear = new Date().getFullYear();
+  }
+}
+
+function pickDir(){
+  if(S.settings.direction === 'mixed') return Math.random() < .5 ? 'en-ru' : 'ru-en';
+  return S.settings.direction;
+}
+
+const RU_MONTHS = {
+  'январ':0,'феврал':1,'март':2,'апрел':3,'мая':4,'май':4,'июн':5,'июл':6,
+  'август':7,'сентябр':8,'октябр':9,'ноябр':10,'декабр':11
+};
+function parseDate(s){
+  if(s===null || s===undefined || s==='') return null;
+  if(s instanceof Date) return s;
+  // Google Sheets serial number (days since 1899-12-30)
+  if(typeof s === 'number'){
+    const ms = (s - 25569) * 86400000;
+    const d = new Date(ms);
+    return isNaN(d) ? null : d;
+  }
+  const str = String(s).trim();
+  // ISO
+  const iso = new Date(str);
+  if(!isNaN(iso) && /\d{4}/.test(str)) return iso;
+  // Russian: "19 января" or "19 января 2026"
+  const ru = str.match(/(\d{1,2})\s+([а-яё]+)\s*(\d{4})?/i);
+  if(ru){
+    const day = +ru[1];
+    const monStr = ru[2].toLowerCase();
+    let mon = -1;
+    for(const k in RU_MONTHS){ if(monStr.startsWith(k)){ mon = RU_MONTHS[k]; break; } }
+    if(mon >= 0){
+      // year: if not specified, infer (use current year, but if month is far in future, take previous year)
+      let year = ru[3] ? +ru[3] : (window._inferYear || new Date().getFullYear());
+      return new Date(year, mon, day);
+    }
+  }
+  // DD.MM.YYYY
+  const m = str.match(/(\d{1,4})[./-](\d{1,2})[./-](\d{1,4})/);
+  if(m){
+    let [_,a,b,c]=m;
+    if(a.length===4) return new Date(+a,+b-1,+c);
+    return new Date(+c,+b-1,+a);
+  }
+  return null;
+}
+
+/* ============== RENDER ============== */
+function renderCard(){
+  const sess = S.session;
+  if(!sess) return;
+  if(sess.cur >= sess.queue.length){
+    if(S.settings.repeat && sess.again.length){
+      sess.queue = sess.again.slice();
+      sess.again = [];
+      sess.cur = 0;
+    } else {
+      renderFinish();
+      return;
+    }
+  }
+
+  const w = sess.queue[sess.cur];
+  const total = sess.queue.length + sess.done.length;
+  const idx = sess.done.length + 1;
+  const progress = (sess.done.length / Math.max(total,1)) * 100;
+
+  const dir = w._dir;
+  const front = dir === 'en-ru' ? w.en : w.ru;
+  const back = dir === 'en-ru' ? w.ru : w.en;
+  const frontLabel = dir === 'en-ru' ? 'ENGLISH' : 'РУССКИЙ';
+  const backLabel = dir === 'en-ru' ? 'РУССКИЙ' : 'ENGLISH';
+
+  let sentenceHtml = '';
+  if(S.settings.sentence && w.sentence){
+    let s = w.sentence;
+    if(S.settings.hide && dir === 'en-ru'){
+      // hide english word in sentence on front
+      const re = new RegExp('\\b' + escapeRe(w.en.split(' ')[0]) + '\\w*', 'ig');
+      s = s.replace(re, '___');
+    }
+    sentenceHtml = `<div class="sentence">${escapeHtml(s)}</div>`;
+  }
+  let backSentenceHtml = '';
+  if(S.settings.sentence && w.sentence){
+    backSentenceHtml = `<div class="sentence">${highlight(w.sentence, w.en)}</div>`;
+  }
+
+  let synHtml = '';
+  if(S.settings.synonyms && w.syn){
+    synHtml = `<div class="syn">syn: ${escapeHtml(w.syn)}</div>`;
+  }
+
+  const isMarked = w.hard || sess.markedHard.has(w.rowIndex);
+
+  study.innerHTML = `
+    <div class="progress-bar"><div style="width:${progress}%"></div></div>
+    <div class="stats-row">
+      <div class="stat">card<b>${idx}/${total}</b></div>
+      <div class="stat red">again<b>${sess.stats.again}</b></div>
+      <div class="stat" style="color:var(--accent)">hard<b>${sess.stats.hard}</b></div>
+      <div class="stat green">good<b>${sess.stats.good + sess.stats.easy}</b></div>
+      <div class="stat">queue<b>${sess.again.length}</b></div>
+    </div>
+
+    <div class="card-wrap">
+      <div class="card${sess.flipped?' flipped':''}" id="theCard">
+        <div class="face front">
+          <div class="label">${frontLabel}</div>
+          <button class="hard-toggle${isMarked?' active':''}" data-hard-toggle title="Пометить как сложное (H)">
+            <span class="star">${isMarked?'★':'☆'}</span>${isMarked?'hard':'mark hard'}
+          </button>
+          <div class="word">${escapeHtml(front)}</div>
+          ${dir==='en-ru' ? sentenceHtml : ''}
+          <div class="flip-hint">↻ нажми или Space</div>
+        </div>
+        <div class="face back">
+          <div class="label">${backLabel}</div>
+          <button class="hard-toggle${isMarked?' active':''}" data-hard-toggle title="Пометить как сложное (H)">
+            <span class="star">${isMarked?'★':'☆'}</span>${isMarked?'hard':'mark hard'}
+          </button>
+          <div class="word">${escapeHtml(back)}</div>
+          ${dir==='en-ru' ? '' : sentenceHtml}
+          ${dir==='ru-en' && S.settings.sentence && w.sentence ? backSentenceHtml : ''}
+          ${synHtml}
+          <div class="flip-hint">оцени ниже · 1-4</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="answer-row" id="ansRow" style="display:${sess.flipped?'grid':'none'}">
+      <button class="ans-again" data-a="again">Снова<small>1 · через минуту</small></button>
+      <button class="ans-hard" data-a="hard">Сложно<small>2 · ещё раз</small></button>
+      <button class="ans-good" data-a="good">Хорошо<small>3 · ок</small></button>
+      <button class="ans-easy" data-a="easy">Легко<small>4 · убрать</small></button>
+    </div>
+
+    <div class="nav-row" style="display:${sess.flipped?'none':'flex'}">
+      <div class="left">
+        <button id="btnPrev" ${sess.cur===0?'disabled':''}>← Назад</button>
+      </div>
+      <div class="right">
+        <button id="btnFlip" class="primary">Показать ответ (Space)</button>
+        <button id="btnSkip">Пропустить →</button>
+        <button id="btnEnd" class="danger">Завершить</button>
+      </div>
+    </div>
+  `;
+
+  $('theCard').onclick = (e) => {
+    if(e.target.closest('[data-hard-toggle]')) return; // не флипать при клике на кнопку
+    flip();
+  };
+  document.querySelectorAll('[data-hard-toggle]').forEach(b => {
+    b.onclick = (e) => { e.stopPropagation(); toggleHardCurrent(); };
+  });
+  if($('btnFlip')) $('btnFlip').onclick = flip;
+  if($('btnSkip')) $('btnSkip').onclick = () => { sess.cur++; renderCard(); };
+  if($('btnPrev')) $('btnPrev').onclick = () => { if(sess.cur>0){sess.cur--;sess.flipped=false;renderCard();} };
+  if($('btnEnd')) $('btnEnd').onclick = () => { renderFinish(); };
+  document.querySelectorAll('#ansRow button').forEach(b => b.onclick = () => answer(b.dataset.a));
+
+  if(S.settings.tts) speak(dir === 'en-ru' ? w.en : (sess.flipped ? w.en : ''));
+  if(S.settings.auto && !sess.flipped){
+    clearTimeout(window._autoT);
+    window._autoT = setTimeout(flip, 5000);
+  }
+}
+
+function flip(){
+  if(!S.session) return;
+  S.session.flipped = !S.session.flipped;
+  if(S.session.flipped && S.settings.tts){
+    const w = S.session.queue[S.session.cur];
+    speak(w.en);
+  }
+  renderCard();
+}
+
+function toggleHardCurrent(){
+  const sess = S.session;
+  if(!sess) return;
+  const w = sess.queue[sess.cur];
+  if(!w) return;
+  if(sess.markedHard.has(w.rowIndex)) sess.markedHard.delete(w.rowIndex);
+  else sess.markedHard.add(w.rowIndex);
+  renderCard();
+}
+
+function answer(type){
+  const sess = S.session;
+  if(!sess) return;
+  const w = sess.queue[sess.cur];
+  sess.stats[type]++;
+  if(type === 'again' || type === 'hard'){
+    sess.again.push({...w});
+  }
+  sess.done.push(w);
+  sess.queue.splice(sess.cur, 1);
+  sess.flipped = false;
+  if(sess.cur >= sess.queue.length) sess.cur = sess.queue.length;
+  renderCard();
+}
+
+function renderFinish(){
+  const sess = S.session;
+  const s = sess.stats;
+  const correct = s.good + s.easy;
+  const total = s.again + s.hard + s.good + s.easy;
+  const pct = total ? Math.round(correct/total*100) : 0;
+  const hardCount = sess.markedHard.size;
+  const hardList = [...sess.markedHard].map(idx => {
+    const w = S.rawData.find(x => x.rowIndex === idx);
+    return w ? w.en : `row ${idx}`;
+  }).join(', ');
+
+  study.innerHTML = `
+    <div class="finish">
+      <div class="big">${pct}%</div>
+      <h3>Сессия завершена</h3>
+      <p>Молодец, Михаил. ${correct} из ${total} с первого раза.</p>
+      <div class="finish-stats">
+        <div class="s"><span class="v">${s.again}</span><span class="l">again</span></div>
+        <div class="s"><span class="v">${s.hard}</span><span class="l">hard</span></div>
+        <div class="s"><span class="v">${s.good}</span><span class="l">good</span></div>
+        <div class="s"><span class="v">${s.easy}</span><span class="l">easy</span></div>
+      </div>
+
+      ${hardCount > 0 ? `
+        <div style="margin:24px auto;max-width:520px;padding:18px;background:rgba(255,94,108,.06);border:1px solid rgba(255,94,108,.25);border-radius:12px;text-align:left">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">★ Помечено как сложные · ${hardCount}</div>
+          <div style="font-size:13px;color:var(--text);line-height:1.5">${escapeHtml(hardList)}</div>
+        </div>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <button id="btnPushHard" class="primary">★ Пометить в таблице (столбец I)</button>
+          <button class="ghost" onclick="location.reload()">↻ Новая сессия</button>
+        </div>
+        <div id="pushStatus" class="hint" style="margin-top:14px;text-align:center"></div>
+      ` : `
+        <button class="primary" onclick="location.reload()">↻ Новая сессия</button>
+      `}
+    </div>
+  `;
+
+  if(hardCount > 0){
+    $('btnPushHard').onclick = () => {
+      const indices = [...sess.markedHard];
+      const btn = $('btnPushHard');
+      const status = $('pushStatus');
+      btn.disabled = true;
+      status.textContent = 'Авторизация...';
+      status.style.color = 'var(--text-dim)';
+      requireAuth(async () => {
+        try {
+          status.textContent = 'Запись в таблицу...';
+          await markHardInSheet(indices);
+          // Обновим локальные данные
+          for(const idx of indices){
+            const w = S.rawData.find(x => x.rowIndex === idx);
+            if(w) w.hard = true;
+          }
+          localStorage.setItem('eng_raw_data', JSON.stringify(S.rawData));
+          status.textContent = `✓ Отмечено ${indices.length} слов в столбце I`;
+          status.style.color = 'var(--green)';
+          btn.textContent = '✓ Готово';
+        } catch(e) {
+          status.textContent = '✗ Ошибка: ' + e.message;
+          status.style.color = 'var(--red)';
+          btn.disabled = false;
+        }
+      });
+    };
+  }
+
+  S.session = null;
+  // сохраним пометки до закрытия — на случай если юзер передумает
+  S._lastMarkedHard = sess.markedHard;
+}
+
+/* ============== UTILS ============== */
+function escapeHtml(s){return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function escapeRe(s){return String(s).replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
+function highlight(sentence, word){
+  if(!word) return escapeHtml(sentence);
+  const w = word.split(' ')[0];
+  const re = new RegExp('\\b(' + escapeRe(w) + '\\w*)','ig');
+  return escapeHtml(sentence).replace(re, '<b>$1</b>');
+}
+function speak(text){
+  if(!text || !window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US'; u.rate = .9;
+  window.speechSynthesis.speak(u);
+}
+
+/* ============== KEYBOARD ============== */
+document.addEventListener('keydown', e => {
+  if(modal.classList.contains('show')) return;
+  if(!S.session) return;
+  if(e.code === 'Space'){ e.preventDefault(); flip(); }
+  else if(e.key === 'h' || e.key === 'H' || e.key === 'р' || e.key === 'Р'){ toggleHardCurrent(); }
+  else if(S.session.flipped && ['1','2','3','4'].includes(e.key)){
+    const map = {'1':'again','2':'hard','3':'good','4':'easy'};
+    answer(map[e.key]);
+  } else if(!S.session.flipped){
+    if(e.key === 'ArrowRight'){ S.session.cur++; renderCard(); }
+    else if(e.key === 'ArrowLeft' && S.session.cur > 0){ S.session.cur--; renderCard(); }
+  }
+});
+
+/* Open modal at start if no key */
+if(!S.apiKey) setTimeout(openModal, 300);
+</script>
+</body>
+</html>
